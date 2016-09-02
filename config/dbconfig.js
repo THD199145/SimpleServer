@@ -1,0 +1,16 @@
+module.exports={
+  mysql:{
+    host:'host',
+    user:'root',
+    password:'root',
+    port:'3306',
+    database:'db'
+  },
+  mysqlReadOnly:{
+    host:'host',
+    user:'root',
+    password:'root',
+    port:'3306',
+    database:'db'
+  }
+}
