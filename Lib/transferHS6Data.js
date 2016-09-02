@@ -36,7 +36,7 @@ exports.SaveUpHS6Data=async function(IDPS,data){
                 });
             }
         }else{
-            //温湿度数据
+            result=3;
         }
     }catch(e){
         result=3;
