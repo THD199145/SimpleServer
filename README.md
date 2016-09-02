@@ -1,6 +1,6 @@
 # SimpleServer
 a simple server  with koa2 and mysql include register,verify,product_data,weight_down 
-+-- config
++-- config                                                                                                                            
 |   +-- dbconfig.js
 |   +-- regexconfig.js
 |   +-- scsvconfig.js
