@@ -12,13 +12,13 @@ function Main(){
    app.use(bodyparser);
    app.use(router.routes(),router.allowedMethods());
 
-   //产品数据上传
+   //receive data from device
    const DeviceDataHandler=require('./routes/WeightDevice/productdataHandler');
    router.use('/netdevice',verifyParms.verifyWeightDevicePublicParmsAndSc,DeviceDataHandler.routes(),DeviceDataHandler.allowedMethods());
-   //用户信息接口
+   //user auth api
    const UserDataHandler=require('./routes/UserAuth/userdataHandler');
    router.use('/userauth',verifyParms.verifyUserAuthPublicParmsAndSc,UserDataHandler.routes(),UserDataHandler.allowedMethods());
-   //测量数据下载
+   //download data
    const MeasureDataHandler=require('./routes/MeasureData/weightHandler');
    router.use('/measuredata',verifyParms.verifyUserAuthPublicParmsAndSc,MeasureDataHandler.routes(),MeasureDataHandler.allowedMethods());
    
