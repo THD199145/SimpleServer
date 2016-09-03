@@ -1,4 +1,4 @@
-//设备数据处理
+//dealing with data from device
 var convertTools=require('../Util/convertTools');
 var weightData=require('../dao/WeightMeasurementInfo_op');
 
@@ -7,17 +7,17 @@ var weightData=require('../dao/WeightMeasurementInfo_op');
 //module.exports=transferData;
 
 
-//上传数据
+//receive idps and weight info
 exports.SaveUpHS6Data=async function(IDPS,data){
     try{
-        //返回标示1 成功，2 数据条数不符 3 失败
+        //define 1 success，2 number of data isn't equal true number 3 fail
         var result=1;
         var dataBytes = new Buffer(data, "base64");
         var dataType=dataBytes[1];
         var dataLength = dataBytes[2];
         var recordCount = dataBytes[3];
         var recordsLength = dataBytes.length - 4;
-        //体重数据
+        //if datatype=1 weight 
         if(dataType==1){
             var aRecordLength=0;
             if ((recordsLength / 22 == recordCount && recordsLength % 22 == 0)){
@@ -29,7 +29,7 @@ exports.SaveUpHS6Data=async function(IDPS,data){
             if(aRecordLength==0){
                 result=2;
             }else{
-                //拆分数据
+                //resolve data
                 var weightDataEntities=getWeightDataList(dataBytes.slice(4),aRecordLength,IDPS.SN);
                 weightDataEntities.forEach(function(v,i){
                     SaveWeightData(v,i);
@@ -44,7 +44,7 @@ exports.SaveUpHS6Data=async function(IDPS,data){
     }
     return result;
 }
-//存储体重数据
+//save weight data to db
 async function SaveWeightData(DataEntity,i){
     var result=await weightData.selectWeightDataByUserIdAndDataID(DataEntity.UserId,DataEntity.DataID);
     console.log(DataEntity.weight);
@@ -62,13 +62,13 @@ function getUtcTime(){
    return dt;
 }
 
-//拆分数据
+//reslove weight data
 function getWeightDataList(databytes,datalength,Did){
     var weightDataEntities=[];
     for(var i=0;i<databytes.length;i+=datalength){
         var tempWeight = getTempWeight(databytes.slice(10, 12));
         var weightRightTwo = tempWeight.toString().length > 2 ? tempWeight.toString().substring(tempWeight.toString().length - 2) : tempWeight.toString();
-        //数据实体
+        //single data
         var DataEntity={
             mdeviceId:Did,
             UserId: getUserID(databytes.slice(0, 3)),
