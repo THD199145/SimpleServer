@@ -14,23 +14,23 @@ exports.sendResponse=function(ctx, result, returnValue, resultCode, queueNum){
     };
     ctx.response.body=result;
 }
-//缺少参数
+//parameter lost
 exports.ParmsLost=function(ctx,queueNum){
     this.sendResponse(ctx,"2","",enums.APIResultMessage.ParamsLost,queueNum);
 }
-//SCSV不正确
+//SCSV error
 exports.ScSvError=function(ctx,queueNum){
     this.sendResponse(ctx,"2","",enums.APIResultMessage.ScSvError,queueNum);
 }
-//正确返回
+//success
 exports.successWithCode=function(ctx,code,queueNum,returnValue){
     this.sendResponse(ctx,"1",returnValue,code,queueNum);
 }
-//错误返回
+//fail
 exports.FailWithCode=function(ctx,code,queueNum,returnValue){
     this.sendResponse(ctx,"2",returnValue,code,queueNum);
 }
-//Server错误返回
+//Server error
 exports.ServerError=function(ctx,queueNum,returnValue){
     this.sendResponse(ctx,"3",returnValue,enums.APIResultMessage.ServerError,queueNum);
 }
