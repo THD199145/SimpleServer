@@ -74,7 +74,7 @@ var weight_downParmsArray=[
         "PhoneModel": "1.0.0`",
         "un": "7xxx4@qq.com",
         "pw": "xxxxx`",
-        "pagesize": 11,
+        "pagesize": 1,
         "ts": 0
     }
 ]
