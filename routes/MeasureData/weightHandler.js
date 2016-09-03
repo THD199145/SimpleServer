@@ -8,31 +8,31 @@ var UserData=require('../../dao/thdUser_op');
 var weightMeasureData=require('../../Lib/weightMeasureData');
 var cryto=require('../../Util/cryptoTools');
 
-//体重数据下载
+//weight down
 router.post('/weight_down',async function(ctx,next){
- //验证参数
+ //verify params
  if(verifyParms.verifySpecweightdownParms(ctx.request.body)){
-     //验证参数合法性
+     //verify params wether valid
      var ts=parseInt(ctx.request.body.ts);
      var pagesize=parseInt(ctx.request.body.pagesize);
      if(verifyParms.verifyWeightDownParmsValid(ts,pagesize)){
-         //验证Sv
+         //verify Sv
          if(verifyParms.verifySv(ctx.request.body.sv,scsvconfig.weightdownSv)){        
              var result=await UserData.selectByUserName(ctx.request.body.un);
-             //验证用户
-             if(result.length=1){
+             //verify user
+             if(result.length==1){
                 var password=cryto.createMd5(ctx.request.body.pw+ctx.request.body.un);
                 if(result[0].PassWord==password){
-                //成功 拆分参数 下载数据
+                //query data from db
                 var result=await weightMeasureData.userweightdataDown(result[0].UserId,ts,pagesize);
                 responseHelper.successWithCode(ctx,enums.APIResultMessage.Success,ctx.request.body.QueueNum,result);
                 
                 }else{
-                    //密码错误
+                    //password error
                     responseHelper.FailWithCode(ctx,enums.APIResultMessage.PasswordError,ctx.request.body.QueueNum,'');
                 }
              }else{
-                 //用户不存在
+                 //user not exist
                  responseHelper.FailWithCode(ctx,enums.APIResultMessage.UserNotExist,ctx.request.body.QueueNum,'');
              }
         }else{
