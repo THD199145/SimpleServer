@@ -7,11 +7,11 @@ var transferHS6Data=require('../../Lib/transferHS6Data');
 var enums=require('../../models/DeviceResultMessage');
 
 router.post('/product_data',async function(ctx,next){
- //验证参数
+ //verify params
  if(verifyParms.verifySpecProductDataParms(ctx.request.body)){
-     //验证Sv
+     //verify sv
      if(verifyParms.verifySv(ctx.request.body.sv,scsvconfig.product_dataSv)){ 
-         //上传数据
+         //upload data
          var result=await transferHS6Data.SaveUpHS6Data(ctx.request.body.IDPS,ctx.request.body.Data);
          if(result==1){
              responseHelper.successWithCode(ctx,enums.APIResultMessage.Success,ctx.request.body.QueueNum,'');
