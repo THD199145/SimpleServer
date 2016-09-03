@@ -1,26 +1,26 @@
 module.exports = {
     APIResultMessage : {
-    // 成功
+    // success
     Success: 100,
-    //失败
+    //fail
     Fail:200,
-    //参数不合法
+    //paramter invalid
     ParamsValid:201,
-    //参数缺失
+    //paramter lost
     ParamsLost:202,
-    //用户名不是邮箱
+    //username isn't email
     UserNameIsNotEmail:203,
-    //用户名重复
+    //username repeated
     UserNameRepeat:204,
-    //用户名和密码不匹配
+    //password error
     PasswordError:205,
-    //用户不存在
+    //user isn't exist
     UserNotExist:209,
-    //ScSv错误
+    //ScSv error
     ScSvError:215,
-    //数据条数不匹配
+    //number of data is not true
     DataCountsError:216,
-    //服务器错误
+    //server error
     ServerError:500
     }
 }
