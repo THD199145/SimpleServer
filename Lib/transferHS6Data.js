@@ -83,7 +83,7 @@ function getWeightDataList(databytes,datalength,Did){
             DCI: getDCI(databytes.slice(20, 22)),
             DataID:Did+getUserID(databytes.slice(0, 3))+weightRightTwo+getTime(databytes.slice(4, 10)).getTime()
         };
-        console.log(DataEntity);
+        //console.log(DataEntity);
         weightDataEntities.push(DataEntity);
     }
     return weightDataEntities;
