@@ -1,4 +1,4 @@
-//测量数据处理
+//dealing with weight of user
 var convertTools=require('../Util/convertTools');
 var weightData=require('../dao/WeightMeasurementInfo_op');
 var moment=require('moment');
@@ -8,13 +8,13 @@ module.exports=measureweight;
 
 measureweight.userweightdataDown=async function(userid,ts,pagesize){
     var searchtime=moment.unix(0).format('YYYY-MM-DD HH:mm:ss');
-    //如果时间戳为0 则从1970开始下载
+    //if ts=0 set query term is 1970-01-01
     if(ts>0){
         searchtime=moment.unix(ts).format('YYYY-MM-DD HH:mm:ss');
     }
     var weightList=[];
     var arr=[userid,searchtime,pagesize];
-    //查询数据
+    //query data from db
     var result=await weightData.selectByUserIdAndMeasurementTimeDesc(arr);
     if(result.length>0){
         for(var i = 0; i < result.length; i++){
