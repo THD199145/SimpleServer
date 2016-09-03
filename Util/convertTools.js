@@ -1,6 +1,6 @@
 //var convertTools={};
 //module.exports=convertTools;
-//byte转int
+//byte to int
 exports.byteToInt=function(buf) {
   if (!buf || buf.length == 0 || buf.length > 4) {
     return 0;
