@@ -1,6 +1,6 @@
 var crypto = require('crypto');
 
-//md5加密
+//md5
 exports.createMd5=function(text){
      var md5 = crypto.createHash('md5');
      md5.update(text);
