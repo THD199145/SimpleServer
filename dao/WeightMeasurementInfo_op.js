@@ -1,4 +1,4 @@
-// 实现对weightmeasurementinfo表的数据操作 2016-08-30
+// operate weightmeasurementinfo table 2016-08-30
 var mysql=require('mysql');
 var conf=require('../config/dbconfig');
 var sql=require('./WeightMeasurementInfo_SqlMapping');
@@ -7,7 +7,7 @@ var dbHelper=require('../Util/dbHelper');
 //var weightData={};
 //module.exports=weightData;
 
-//添加数据
+//insert
 exports.addWeightData=function(arr){
   try{
       return new Promise(function(resolve,reject){
@@ -24,7 +24,7 @@ exports.addWeightData=function(arr){
     console.log(e);
   }
 }
-// 查找数据通过userid降序查询数据
+// query by userid order by measurement desc
 exports.selectByUserIdAndMeasurementTimeDesc=function(arr){
   return new Promise(function(resolve,reject){
     dbHelper.execQueryReadOnly(sql.selectByUserIdAndMeasurementTimeDesc,arr,function(err,rows){
@@ -36,7 +36,7 @@ exports.selectByUserIdAndMeasurementTimeDesc=function(arr){
     })
   });
 }
-// 查找数据通过Userid和DataID
+// query by userid and dataid
 exports.selectWeightDataByUserIdAndDataID=function(userid,DataID,count,measuretime){
   return new Promise(function(resolve,reject){
     dbHelper.execQueryReadOnly(sql.selectByUserIdAndDataID,[userid,DataID],function(err,rows){
