@@ -1,4 +1,4 @@
-//执行的sql语句
+//sql
 var weightsql={
   insert:'insert into WeightMeasurementInfo ' +
     '(GuID, AppDataId1, UserId, BMI, BoneValue, DCI, FatValue, MuscaleValue, WaterValue'+
