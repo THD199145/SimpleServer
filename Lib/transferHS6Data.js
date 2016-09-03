@@ -47,7 +47,7 @@ exports.SaveUpHS6Data=async function(IDPS,data){
 //save weight data to db
 async function SaveWeightData(DataEntity,i){
     var result=await weightData.selectWeightDataByUserIdAndDataID(DataEntity.UserId,DataEntity.DataID);
-    console.log(DataEntity.weight);
+    //console.log(DataEntity.weight);
     if(result.length==0){
        var weight=['',DataEntity.DataID,DataEntity.UserId,0,DataEntity.Bone,DataEntity.DCI,DataEntity.BodyFat
        ,DataEntity.Muscle,DataEntity.Water,DataEntity.Weight,1,DataEntity.MeasureTime,1,DataEntity.mdeviceId
