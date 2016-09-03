@@ -7,4 +7,8 @@
 # Run the server:
 <p>1 npm install
 <p>2 node index.js
+# Run test
+<p> 1 npm install -gobal mocha
+<p> 2 mocha -t 10000
+
 
