@@ -1,7 +1,7 @@
 var ScsvSetting=require('../config/scsvconfig');
 var responseHelper=require('../Util/responseHelper');
 
-//验证设备上传的公共参数
+//verify netdevice public parameters
 function verifyWeightDevicePublicParms(publicParms){
     if(publicParms.sc 
     && publicParms.sv 
@@ -19,7 +19,7 @@ function verifyWeightDevicePublicParms(publicParms){
         return false;
     }
 }
-//验证UserAuth上传的公共参数
+//verify UserAuth public paramters
 function verifyUserAuthPublicParms(publicParms){
     if(publicParms.sc 
     && publicParms.sv 
@@ -33,7 +33,7 @@ function verifyUserAuthPublicParms(publicParms){
         return false;
     }
 }
-//验证上传数据接口特殊参数
+//verify product_data paramters
 exports.verifySpecProductDataParms=function(productdataParms){
     if(productdataParms.Data){
         return true;
@@ -41,7 +41,7 @@ exports.verifySpecProductDataParms=function(productdataParms){
         return false;
     }
 }
-//验证Register接口特殊参数
+//verify register paramters
 exports.verifySpecRegisterAndVerifyParms=function(productdataParms){
     if(productdataParms.un 
     && productdataParms.pw){
@@ -50,7 +50,7 @@ exports.verifySpecRegisterAndVerifyParms=function(productdataParms){
         return false;
     }
 }
-//验证weightdown接口特殊参数
+//verify weight_down paramters
 exports.verifySpecweightdownParms=function(productdataParms){
     if(productdataParms.un 
     && productdataParms.pw
@@ -61,19 +61,19 @@ exports.verifySpecweightdownParms=function(productdataParms){
         return false;
     }
 }
-//验证体重设备SC
+//verify netdevice sc
 function verifyDeviceSC(sc){
     return sc==ScsvSetting.SC;
 }
-//验证UserAuth SC
+//verify userauth sc
 function verifyUserAuthSC(sc){
     return sc==ScsvSetting.UserAuthSC;
 }
-//验证体重秤数据上传SV
+//verify netdevice sv
 exports.verifySv=function(sv,specSv){
     return sv==specSv;
 }
-//验证设备的公共参数和SC
+//verify netdevice sc and public paramters
 exports.verifyWeightDevicePublicParmsAndSc=async function(ctx,next){
     if(!verifyWeightDevicePublicParms(ctx.request.body)){
          responseHelper.ParmsLost(ctx,"");
@@ -83,12 +83,12 @@ exports.verifyWeightDevicePublicParmsAndSc=async function(ctx,next){
         responseHelper.ScSvError(ctx,ctx.request.body.QueueNum);
         return;
     }
-    //抛出异常
+    //throw exception
      await next().catch(function(e){
         responseHelper.ServerError(ctx,ctx.request.body.QueueNum,e.message);
     });
 }
-//验证userAuth接口的公共参数和sc
+//verify userauth sc and public paramters
 exports.verifyUserAuthPublicParmsAndSc=async function(ctx,next){
     if(!verifyUserAuthPublicParms(ctx.request.body)){
          responseHelper.ParmsLost(ctx,"");
@@ -98,17 +98,17 @@ exports.verifyUserAuthPublicParmsAndSc=async function(ctx,next){
         responseHelper.ScSvError(ctx,ctx.request.body.QueueNum);
         return;
     }
-    //抛出异常
+    //throw exception
      await next().catch(function(e){
         responseHelper.ServerError(ctx,ctx.request.body.QueueNum,e.message);
     });
 }
-//正则验证
+//regex email
 exports.regexParms=function(text){
    var regexmail=/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
    return regexmail.test(text);
 }
-//验证参数是否是数字
+//isNaN
 exports.verifyWeightDownParmsValid=function(a,b){
     if(!isNaN(a) && !isNaN(b)){
         if(b>=0 && a>=0){
