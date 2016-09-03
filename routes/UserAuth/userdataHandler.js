@@ -8,16 +8,16 @@ var enums=require('../../models/DeviceResultMessage');
 var UserData=require('../../dao/thdUser_op');
 var cryto=require('../../Util/cryptoTools');
 
-//用户注册
+//register
 router.post('/register',async function(ctx,next){
- //验证参数
+ //verify params
  if(verifyParms.verifySpecRegisterAndVerifyParms(ctx.request.body)){
-     //验证Sv
+     //verify Sv
      if(verifyParms.verifySv(ctx.request.body.sv,scsvconfig.registerSv)){ 
-         //验证用户名是否为邮箱
+         //verify username whether to mail
          if(verifyParms.regexParms(ctx.request.body.un)){            
              var result=await UserData.selectByUserName(ctx.request.body.un);
-             //注册用户
+             //insert a user to db
              if(result.length==0){
                 var password=cryto.createMd5(ctx.request.body.pw+ctx.request.body.un);
                 result=await UserData.addUserData(ctx.request.body.un,password);
@@ -35,25 +35,25 @@ router.post('/register',async function(ctx,next){
      responseHelper.ParmsLost(ctx,"");
  }
 })
-//用户登录
+//verify 
 router.post('/verify',async function(ctx,next){
- //验证参数
+ //verify params
  if(verifyParms.verifySpecRegisterAndVerifyParms(ctx.request.body)){
-     //验证Sv
+     //verify sv
      if(verifyParms.verifySv(ctx.request.body.sv,scsvconfig.verifySv)){        
              var result=await UserData.selectByUserName(ctx.request.body.un);
-             //验证用户
+             //verify user
              if(result.length=1){
                 var password=cryto.createMd5(ctx.request.body.pw+ctx.request.body.un);
                 if(result[0].PassWord==password){
-                //成功
+                //success
                 responseHelper.successWithCode(ctx,enums.APIResultMessage.Success,ctx.request.body.QueueNum,'');
                 }else{
-                    //密码错误
+                    //password error
                     responseHelper.FailWithCode(ctx,enums.APIResultMessage.PasswordError,ctx.request.body.QueueNum,'');
                 }
              }else{
-                 //用户不存在
+                 //user is not exist
                  responseHelper.FailWithCode(ctx,enums.APIResultMessage.UserNotExist,ctx.request.body.QueueNum,'');
              }
      }else{
