@@ -43,7 +43,7 @@ router.post('/verify',async function(ctx,next){
      if(verifyParms.verifySv(ctx.request.body.sv,scsvconfig.verifySv)){        
              var result=await UserData.selectByUserName(ctx.request.body.un);
              //verify user
-             if(result.length=1){
+             if(result.length==1){
                 var password=cryto.createMd5(ctx.request.body.pw+ctx.request.body.un);
                 if(result[0].PassWord==password){
                 //success
