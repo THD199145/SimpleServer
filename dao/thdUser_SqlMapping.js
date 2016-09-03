@@ -1,3 +1,4 @@
+//sql
 var thdUsersql={
   insert:'insert into thdUser ' +
     '(UserName,PassWord,IsActive,CreateTime,LastChangeTime,LastLoginTime)' +
