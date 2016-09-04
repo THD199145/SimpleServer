@@ -4,7 +4,7 @@ var mysql=require('mysql');
 var pool=mysql.createPool(config.mysql);
 var poolReadOnly=mysql.createPool(config.mysqlReadOnly);
 
-//write data to master through master
+//write data through master
 exports.execQuery=function(sql,values,callback){
   OperateData(pool,sql,values,function(err,result){
     if(err){
