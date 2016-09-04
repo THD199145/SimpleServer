@@ -4,7 +4,7 @@ var mysql=require('mysql');
 var pool=mysql.createPool(config.mysql);
 var poolReadOnly=mysql.createPool(config.mysqlReadOnly);
 
-//通过主库写入数据
+//write data to master through master
 exports.execQuery=function(sql,values,callback){
   OperateData(pool,sql,values,function(err,result){
     if(err){
@@ -16,7 +16,7 @@ exports.execQuery=function(sql,values,callback){
   });
 }
 
-//通过从库读取数据
+//read data from slave
 exports.execQueryReadOnly=function(sql,values,callback){
   OperateData(pool,sql,values,function(err,result){
     if(err){
@@ -28,7 +28,7 @@ exports.execQueryReadOnly=function(sql,values,callback){
   });
 }
 
-//操作数据
+//operate data create connection and release connection
 var OperateData=function(myPool,sql,values,callback){
   var errorinfo;
   myPool.getConnection(function(err,connection){
@@ -37,7 +37,7 @@ var OperateData=function(myPool,sql,values,callback){
       throw errorinfo;
     }else{
       connection.query(sql,values,function(err,rows){
-        //查询成功后释放掉连接
+        //release
         release(connection)
         if(err){
           errorinfo='exec sql error '+err;
@@ -50,7 +50,7 @@ var OperateData=function(myPool,sql,values,callback){
   });
 }
 
-//释放连接
+//release connection
 function release(connection){
   try{
     if(connection!=undefined){
