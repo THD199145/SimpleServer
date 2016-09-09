@@ -1,16 +1,16 @@
 module.exports={
   mysql:{
-    host:'101.251.102.37',
+    host:'127.0.0.1',
     user:'callcenter_rw',
     password:'callcenter_rw',
-    port:'45728',
+    port:'3306',
     database:'AndonCloud_New'
   },
   mysqlReadOnly:{
-    host:'101.251.102.37',
+    host:'127.0.0.1',
     user:'callcenter_rw',
     password:'callcenter_rw',
-    port:'45728',
+    port:'3306',
     database:'AndonCloud_New'
   }
 }
