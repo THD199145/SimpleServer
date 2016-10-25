@@ -11,7 +11,7 @@ function Main(){
    var app=new koa();
    app.use(bodyparser);
    app.use(router.routes(),router.allowedMethods());
-
+   console.log(1);
    //receive data from device
    const DeviceDataHandler=require('./routes/WeightDevice/productdataHandler');
    router.use('/netdevice',verifyParms.verifyWeightDevicePublicParmsAndSc,DeviceDataHandler.routes(),DeviceDataHandler.allowedMethods());
@@ -21,7 +21,7 @@ function Main(){
    //download data
    const MeasureDataHandler=require('./routes/MeasureData/weightHandler');
    router.use('/measuredata',verifyParms.verifyUserAuthPublicParmsAndSc,MeasureDataHandler.routes(),MeasureDataHandler.allowedMethods());
-   
+
    app.use(ctx=>{ctx.response.body="Hello"});
    var httpserver = http.createServer(app.callback());
    httpserver.listen(process.env.PORT || 3000);
@@ -29,6 +29,3 @@ function Main(){
    //app.listen(3000);
 }
 server.Run(Main);
-
-
-
